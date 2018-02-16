@@ -1,11 +1,14 @@
 import os
-from flask import Flask
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return 'Hello World!'
+    if 'text/html' in str(request.accept_mimetypes):
+        return render_template('yes.html')
+    else:
+        return 'YES, plotly.host works for you.'
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
